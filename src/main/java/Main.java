@@ -1,56 +1,112 @@
-import java.util.Scanner;
-public class Main
-{
-	public static void main(String[] args) {
-		Queue <Integer> q=new Queue<>();
-		q.insert(8);
-		q.insert(2);
-		q.insert(7);
+public static void main(String[] args) {
 
-		System.out.println(isExist(q,2));
-		System.out.println(avg(q));
+        Queue<Integer> q = new Queue<>();
+        q.insert(3);
+        q.insert(2);
+        q.insert(2);
+        q.insert(7);
 
-	}
+        Queue<Integer> q2 = new Queue<>();
+        q2.insert(1);
+        q2.insert(2);
+        q2.insert(4);
 
-	public static Queue<Integer> ex1(Queue<Integer> q) {
-		Queue<Integer> h = new Queue<Integer>();
-		Queue<Integer> p = new Queue<Integer>();
+        System.out.println(cloneQueue(q));
+        System.out.println(avgq(q));
+        System.out.println(divq(q, 2));
+        System.out.println(istrue(q, q2));
+        System.out.println(streak(q, 2));
+        System.out.println(streak(q, 3));
+    }
 
-		while (!q.isEmpty()) {
-			p.insert(q.head());
-			h.insert(q.remove());
-		}
+    public static Queue<Integer> copyQueue(Queue<Integer> q) {
+        Queue<Integer> copy = new Queue<>();
+        Queue<Integer> temp = new Queue<>();
 
-		while (!p.isEmpty()) {
-			q.insert(p.remove());
-		}
+        while (!q.isEmpty()) {
+            int x = q.remove();
+            copy.insert(x);
+            temp.insert(x);
+        }
 
-		return h;
-	}
+        while (!temp.isEmpty()) {
+            q.insert(temp.remove());
+        }
 
+        return copy;
+    }
+//יעילות של O(2N) כש n זה אורך התור
+}
 
-	public static boolean isExist(Queue<Integer> q, int n) {
-		Queue<Integer> b = ex1(q);
-		while(!b.isEmpty()) {
-			int a = b.remove();
-			if (a==n) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public static Queue<Integer> cloneQueue(Queue<Integer> q) {
+        return copyQueue(q);
+    }
 
-	public static double avg(Queue<Integer> q) {
-		Queue<Integer> n = ex1(q);
-		int sum = 0;
-		int count = 0;
-		while(!n.isEmpty()) {
-			sum = sum + n.remove();
-			count++;
-		}
-		return (double) sum/count;
-	}
+    public static double avgq(Queue<Integer> q) {
+        Queue<Integer> c = copyQueue(q);
+        int sum = 0, count = 0;
 
+        while (!c.isEmpty()) {
+            sum += c.remove();
+            count++;
+        }
 
+        return (double) sum / count;
+    }
+//יעילות של O(N) כש n זה אורך התור
+}
 
+    public static int divq(Queue<Integer> q, int x) {
+        if (x == 0) return 0;
+
+        Queue<Integer> c = copyQueue(q);
+        int count = 0;
+
+        while (!c.isEmpty()) {
+            if (c.remove() % x == 0)
+                count++;
+        }
+
+        return count;
+    }
+//יעילות של O(N) כש n זה אורך התור
+}
+
+    public static boolean istrue(Queue<Integer> q2, Queue<Integer> q1) {
+        Queue<Integer> c2 = copyQueue(q2);
+        Queue<Integer> c1 = copyQueue(q1);
+
+        while (!c2.isEmpty()) {
+            int a = c2.remove();
+            boolean found = false;
+
+            Queue<Integer> temp = copyQueue(c1);
+            while (!temp.isEmpty()) {
+                if (a % temp.remove() == 0)
+                    found = true;
+            }
+
+            if (!found)
+                return false;
+        }
+
+        return true;
+    }
+//יעילות של O(N בריבוע) כש n זה אורך התור
+}
+
+    public static boolean streak(Queue<Integer> q, int x) {
+        Queue<Integer> c = copyQueue(q);
+        int prev = Integer.MIN_VALUE;
+
+        while (!c.isEmpty()) {
+            int curr = c.remove();
+            if (curr == x && prev == x)
+                return true;
+            prev = curr;
+        }
+
+        return false;
+    }
+//יעילות של O(N) כש n זה אורך התור
 }
