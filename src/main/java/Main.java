@@ -12,11 +12,11 @@ public static void main(String[] args) {
         q2.insert(4);
 
         System.out.println(cloneQueue(q));
-        System.out.println(avgq(q));
-        System.out.println(divq(q, 2));
-        System.out.println(istrue(q, q2));
-        System.out.println(streak(q, 2));
-        System.out.println(streak(q, 3));
+        System.out.println(ex2(q));
+        System.out.println(ex3(q, 2));
+        System.out.println(ex4(q, q2));
+        System.out.println(ex5(q, 2));
+        System.out.println(ex5(q, 3));
     }
 
     public static Queue<Integer> copyQueue(Queue<Integer> q) {
@@ -42,7 +42,7 @@ public static void main(String[] args) {
         return copyQueue(q);
     }
 
-    public static double avgq(Queue<Integer> q) {
+    public static double ex2(Queue<Integer> q) {
         Queue<Integer> c = copyQueue(q);
         int sum = 0, count = 0;
 
@@ -56,7 +56,7 @@ public static void main(String[] args) {
 //יעילות של O(N) כש n זה אורך התור
 }
 
-    public static int divq(Queue<Integer> q, int x) {
+    public static int ex3(Queue<Integer> q, int x) {
         if (x == 0) return 0;
 
         Queue<Integer> c = copyQueue(q);
@@ -72,7 +72,7 @@ public static void main(String[] args) {
 //יעילות של O(N) כש n זה אורך התור
 }
 
-    public static boolean istrue(Queue<Integer> q2, Queue<Integer> q1) {
+    public static boolean ex4(Queue<Integer> q2, Queue<Integer> q1) {
         Queue<Integer> c2 = copyQueue(q2);
         Queue<Integer> c1 = copyQueue(q1);
 
@@ -95,7 +95,7 @@ public static void main(String[] args) {
 //יעילות של O(N בריבוע) כש n זה אורך התור
 }
 
-    public static boolean streak(Queue<Integer> q, int x) {
+    public static boolean ex5(Queue<Integer> q, int x) {
         Queue<Integer> c = copyQueue(q);
         int prev = Integer.MIN_VALUE;
 
